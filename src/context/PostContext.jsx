@@ -37,7 +37,6 @@ export const PostProvider = (props) => {
       const response = await axios.get("http://localhost:8081/api/posts");
       console.log('response',response)
       dispatch({ type: "initPosts", payload: response.data.data });
-    };
     getData();
   }, []);
   return (

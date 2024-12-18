@@ -6,6 +6,7 @@ import { PostContext } from "../context/PostContext";
 export default function PostCard({ id, title, body, setIsEdit }) {
   const { postDispatch } = useContext(PostContext);
   const onDeleteclick = async () => {
+
     const response = await axios.delete(`http://localhost:8081/api/posts/${id}`);
     postDispatch({ type: "deletePostById", payload: id });
   };
