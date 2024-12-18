@@ -12,13 +12,14 @@ const reducer = (state, action) => {
     case "addPosts":
       return [...state, action.payload];
     case "deletePostById":
-      const newState = state.filter((post) => post.id !== action.payload);
+      const newState = state.filter((posts) => posts.id !== action.payload);
       return newState;
     case "updatePostById":
       const copystate = [...state];
       const updatedPost = action.payload;
+      console.log( "test2", updatedPost )
       const targetPostId = copystate.findIndex(
-        (post) => post.id == updatedPost.id
+        (posts) => posts.id == updatedPost.id
       );
       copystate[targetPostId] = updatedPost;
       return copystate;
@@ -33,9 +34,9 @@ export const PostProvider = (props) => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get("http://localhost:3000/cars");
-      dispatch({ type: "initPosts", payload: response.data.result });
-    };
+      const response = await axios.get("http://localhost:8081/api/posts");
+      console.log('response',response)
+      dispatch({ type: "initPosts", payload: response.data.data });
     getData();
   }, []);
   return (

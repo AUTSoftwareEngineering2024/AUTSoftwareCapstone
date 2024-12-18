@@ -8,13 +8,14 @@ export default function PostForm() {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const { posts, postDispatch } = useContext(PostContext);
+    console.log("post" ,posts)
     const formSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post("http://localhost:3000/cars", {
+        const response = await axios.post("http://localhost:8081/api/posts/create", {
           title,
           body,
         });
-        postDispatch({ type: "addPosts", payload: response.data.result })};
+        postDispatch({ type: "addPosts", payload: response.data.data})};
 return (
   <>
 <Form onSubmit={formSubmit}>

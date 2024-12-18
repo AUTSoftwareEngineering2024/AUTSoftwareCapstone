@@ -7,15 +7,14 @@ export default function PostUpdateCard({ id, title, body, setIsEdit }) {
   const { postDispatch } = useContext(PostContext);
   const [formTitle, setTitle] = useState(title);
   const [formBody, setBody] = useState(body);
-  console.log("formBody", formBody);
-  console.log("body", body);
   const formSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.put(`http://localhost:3000/cars/${id}`, {
+    const response = await axios.put(`http://localhost:8081/api/posts/${id}`, {
       title: formTitle,
       body: formBody,
     });
-    postDispatch({ type: "updatePostById", payload: response.data.result });
+    console.log("test", response.data)
+    postDispatch({ type: "updatePostById", payload: response.data.data });
     setIsEdit(false);
   };
   const showEditView = () => {
